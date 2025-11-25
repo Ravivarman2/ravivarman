@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: IndiGo International Expansion - Ravivarman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Configuration for IndiGo Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        indigo: {
+                            50: '#f0f5ff',
+                            600: '#0041C2', /* IndiGo Blue Brand Color */
+                            700: '#00359e',
+                            900: '#001e59',
+                        },
+                        orange: {
+                            500: '#FF6600', /* Accent Color */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-bg-indigo {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#0041C2 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            background-opacity: 0.1;
+        }
+        #pdf-viewer-container { transition: opacity 0.3s ease-in-out; }
+        .dashboard-shadow { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-slate-200/70">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-indigo-900">Ravivarman</a>
+            <div class="flex items-center space-x-6">
+                <a href="https://ravivarman2.github.io/ravivarman/resume.html" target="_blank" class="hidden md:inline-flex font-medium text-slate-600 hover:text-indigo-600 transition-colors items-center">
+                    <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Resume
+                </a>
+                <a href="index.html#projects" class="font-medium text-slate-600 hover:text-indigo-600 transition-colors inline-flex items-center group">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform"></i> Back to Portfolio
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="py-20 md:py-28 hero-bg-indigo relative overflow-hidden">
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <div class="inline-flex items-center bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-semibold mb-6">
+                    <i data-lucide="bar-chart-2" class="w-4 h-4 mr-2"></i> Business Intelligence & Strategy
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+                    IndiGo International<br><span class="text-indigo-600">Expansion Strategy</span>
+                </h1>
+                <p class="text-lg text-slate-600 mt-4 max-w-3xl mx-auto leading-relaxed">
+                    A data-driven network planning analysis utilizing <strong>Power BI</strong> and <strong>Excel Modeling</strong> to pivot IndiGo from a regional LCC to a global network carrier.
+                </p>
+                
+                <!-- Key Metrics Preview -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-12">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <div class="text-sm text-slate-500 uppercase font-bold tracking-wider">Proj. Revenue</div>
+                        <div class="text-2xl font-extrabold text-indigo-600">₹9,084 Cr</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <div class="text-sm text-slate-500 uppercase font-bold tracking-wider">Net Profit</div>
+                        <div class="text-2xl font-extrabold text-green-600">₹744 Cr</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <div class="text-sm text-slate-500 uppercase font-bold tracking-wider">Top Route</div>
+                        <div class="text-2xl font-extrabold text-slate-800">BOM-DXB</div>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <div class="text-sm text-slate-500 uppercase font-bold tracking-wider">New Routes</div>
+                        <div class="text-2xl font-extrabold text-slate-800">60+</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deliverables / PDF Viewer Buttons -->
+        <section class="container mx-auto px-6 -mt-10 relative z-20">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-xl">
+                    <h2 class="text-xl font-bold text-slate-800 mb-6 text-center">Project Documents</h2>
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <!-- UPDATE LINK BELOW to your actual PDF file path -->
+                        <button onclick="openViewer('assets/indigo-report.pdf')" class="group bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-indigo-500/40 flex items-center justify-center">
+                            <div class="bg-white/20 p-2 rounded-lg mr-4 group-hover:bg-white/30 transition">
+                                <i data-lucide="presentation" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div class="text-left">
+                                <span class="block text-xs text-indigo-100 uppercase tracking-wide">Strategic Report</span>
+                                <span class="text-lg">View Presentation</span>
+                            </div>
+                        </button>
+                        
+                        <!-- UPDATE LINK BELOW to your Excel-as-PDF file path -->
+                        <button onclick="openViewer('assets/indigo-excel-model.pdf')" class="group bg-white border-2 border-slate-200 hover:border-green-500 hover:bg-green-50 text-slate-700 hover:text-green-700 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center">
+                            <div class="bg-slate-100 p-2 rounded-lg mr-4 group-hover:bg-white border border-slate-200 transition">
+                                <i data-lucide="sheet" class="w-6 h-6 text-green-600"></i>
+                            </div>
+                            <div class="text-left">
+                                <span class="block text-xs text-slate-400 uppercase tracking-wide group-hover:text-green-600">Financial Model</span>
+                                <span class="text-lg">View Excel Data</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PDF Viewer Container (Hidden by default) -->
+        <section id="pdf-viewer-container" class="hidden fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-sm p-4 md:p-8 overflow-y-auto flex flex-col">
+            <div class="w-full max-w-6xl mx-auto flex flex-col h-full">
+                <!-- Viewer Toolbar -->
+                <div id="viewer-controls" class="flex items-center justify-between bg-slate-800 text-white p-4 rounded-t-2xl border-b border-slate-700">
+                    <div class="flex items-center space-x-4">
+                        <button id="prev-page" class="p-2 hover:bg-slate-700 rounded-lg transition-colors"><i data-lucide="arrow-left"></i></button>
+                        <span id="page-num" class="text-sm font-mono bg-slate-900 px-3 py-1 rounded">Page 1</span>
+                        <button id="next-page" class="p-2 hover:bg-slate-700 rounded-lg transition-colors"><i data-lucide="arrow-right"></i></button>
+                    </div>
+                    <button id="close-viewer" onclick="closeViewer()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-bold transition-colors flex items-center">
+                        <i data-lucide="x" class="w-4 h-4 mr-2"></i> Close
+                    </button>
+                </div>
+                <!-- Canvas -->
+                <div id="canvas-container" class="bg-slate-200 flex-1 overflow-auto flex justify-center p-8 rounded-b-2xl">
+                    <canvas id="pdf-canvas" class="shadow-2xl"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis & Insights Section -->
+        <section class="container mx-auto px-6 py-20">
+            <div class="grid lg:grid-cols-3 gap-12">
+                
+                <!-- Left Column: Context -->
+                <div class="lg:col-span-1 space-y-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
+                            <i data-lucide="target" class="text-indigo-600 mr-2"></i> The Challenge
+                        </h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            IndiGo dominates the domestic market but faces saturation. The goal was to identify profitable international routes while navigating complex constraints like <strong>Bilateral Rights</strong>, <strong>Fleet Range</strong>, and <strong>Competitor Capacity</strong> (Emirates/Tata Group).
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
+                            <i data-lucide="layers" class="text-indigo-600 mr-2"></i> Tech Stack
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-sm font-medium border border-slate-200">Power BI</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-sm font-medium border border-slate-200">Advanced Excel</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-sm font-medium border border-slate-200">DAX</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-sm font-medium border border-slate-200">Financial Modeling</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+                        <h4 class="font-bold text-indigo-900 mb-2">Strategic Verdict</h4>
+                        <p class="text-sm text-indigo-800">
+                            The analysis proves a <strong>"Regional Dominance"</strong> strategy (Middle East/SE Asia) yields 35% higher margins than a "Global Long-Haul" strategy due to current fleet wet-lease costs.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Dashboard Gallery -->
+                <div class="lg:col-span-2 space-y-12">
+                    
+                    <!-- Visualization 1: Executive Overview -->
+                    <div class="group">
+                        <div class="mb-4 flex justify-between items-end">
+                            <h3 class="text-2xl font-bold text-slate-900">1. Executive Profitability Overview</h3>
+                            <span class="text-sm text-slate-500">Power BI / Heatmap Analysis</span>
+                        </div>
+                        <div class="rounded-xl overflow-hidden border border-slate-200 dashboard-shadow bg-slate-100 relative aspect-video">
+                            <!-- UPDATE SRC to your image file -->
+                            <img src="assets/dashboard-executive.png" alt="Executive Dashboard showing Profit Heatmap" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <p class="mt-4 text-slate-600 text-sm">
+                            <strong>Insight:</strong> The Profitability Heatmap identifies <strong>BOM-DXB</strong> and <strong>DEL-DXB</strong> as high-volume anchors, while highlighting European routes (Red) as currently loss-making due to wet-lease costs.
+                        </p>
+                    </div>
+
+                    <!-- Visualization 2: Operational Efficiency -->
+                    <div class="group">
+                        <div class="mb-4 flex justify-between items-end">
+                            <h3 class="text-2xl font-bold text-slate-900">2. Operational Efficiency (Breakeven)</h3>
+                            <span class="text-sm text-slate-500">Power BI / Clustered Column Chart</span>
+                        </div>
+                        <div class="rounded-xl overflow-hidden border border-slate-200 dashboard-shadow bg-slate-100 relative aspect-video">
+                            <!-- UPDATE SRC to your image file -->
+                            <img src="assets/dashboard-operations.png" alt="Operational Analysis Dashboard" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <p class="mt-4 text-slate-600 text-sm">
+                            <strong>Insight:</strong> Breakeven Load Factor analysis reveals that Tier-2 routes like <strong>Trichy-Singapore (TRZ-SIN)</strong> have a massive safety margin (Actual LF > Breakeven LF), making them financially safer bets than high-profile European launches.
+                        </p>
+                    </div>
+
+                    <!-- Visualization 3: Market & Seasonality -->
+                    <div class="group">
+                        <div class="mb-4 flex justify-between items-end">
+                            <h3 class="text-2xl font-bold text-slate-900">3. Market Capacity & Seasonality</h3>
+                            <span class="text-sm text-slate-500">Power BI / Donut & Line Charts</span>
+                        </div>
+                        <div class="rounded-xl overflow-hidden border border-slate-200 dashboard-shadow bg-slate-100 relative aspect-video">
+                            <!-- UPDATE SRC to your image file -->
+                            <img src="assets/dashboard-market.png" alt="Market Strategy Dashboard" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <p class="mt-4 text-slate-600 text-sm">
+                            <strong>Insight:</strong> Delhi (DEL) controls 42% of capacity. Seasonality trends indicate a critical "Cash Conservation" period in July-September (Monsoon), suggesting maintenance scheduling during this trough to maximize Q3/Q4 availability.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl font-bold mb-6">Ready to discuss this analysis?</h2>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="mailto:theravivarman.d@gmail.com" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center">
+                    <i data-lucide="mail" class="w-4 h-4 mr-2"></i> Email Me
+                </a>
+                <a href="https://www.linkedin.com/in/ravivarmand/" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center border border-slate-700">
+                    <i data-lucide="linkedin" class="w-4 h-4 mr-2"></i> LinkedIn
+                </a>
+            </div>
+            <p class="text-slate-500 text-sm">&copy; 2025 Ravivarman. Built with Data & Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        // Initialize Icons
+        lucide.createIcons();
+
+        // PDF Viewer Logic
+        const { pdfjsLib } = globalThis;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://mozilla.github.io/pdf.js/build/pdf.worker.mjs`;
+
+        let pdfDoc = null;
+        let pageNum = 1;
+        let pageRendering = false;
+        let pageNumPending = null;
+
+        const viewerContainer = document.getElementById('pdf-viewer-container');
+        const canvas = document.getElementById('pdf-canvas');
+        const ctx = canvas.getContext('2d');
+        const pageNumDisplay = document.getElementById('page-num');
+
+        async function renderPage(num) {
+            pageRendering = true;
+            const page = await pdfDoc.getPage(num);
+            
+            // Adjust scale based on screen size
+            const viewportBase = page.getViewport({ scale: 1.0 });
+            const containerWidth = document.getElementById('canvas-container').clientWidth - 40; // padding
+            const scale = containerWidth / viewportBase.width;
+            const viewport = page.getViewport({ scale: scale > 1.5 ? 1.5 : scale }); // Cap max scale
+
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            
+            const renderTask = page.render(renderContext);
+
+            // Wait for render to finish
+            await renderTask.promise;
+            pageRendering = false;
+            
+            if (pageNumPending !== null) {
+                renderPage(pageNumPending);
+                pageNumPending = null;
+            }
+            
+            pageNumDisplay.textContent = `Page ${num} of ${pdfDoc.numPages}`;
+        }
+
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        function onPrevPage() {
+            if (pageNum <= 1) return;
+            pageNum--;
+            queueRenderPage(pageNum);
+        }
+
+        function onNextPage() {
+            if (pageNum >= pdfDoc.numPages) return;
+            pageNum++;
+            queueRenderPage(pageNum);
+        }
+
+        window.openViewer = async (url) => {
+            // Reset state
+            pdfDoc = null;
+            pageNum = 1;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Show Viewer
+            viewerContainer.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+
+            try {
+                const loadingTask = pdfjsLib.getDocument(url);
+                pdfDoc = await loadingTask.promise;
+                renderPage(pageNum);
+            } catch (error) {
+                console.error('Error loading PDF:', error);
+                alert('Error loading document. Ensure the file is in the assets folder.');
+                closeViewer();
+            }
+        };
+
+        window.closeViewer = () => {
+            viewerContainer.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        };
+
+        // Event Listeners
+        document.getElementById('prev-page').addEventListener('click', onPrevPage);
+        document.getElementById('next-page').addEventListener('click', onNextPage);
+        
+        // Close on clicking outside canvas
+        viewerContainer.addEventListener('click', (e) => {
+            if (e.target === viewerContainer || e.target.id === 'canvas-container') {
+                closeViewer();
+            }
+        });
+    </script>
+</body>
+</html>
